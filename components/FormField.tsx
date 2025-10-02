@@ -1,6 +1,17 @@
 import React from "react"
-import { Controller, Control, FieldValues, Path } from "react-hook-form"
-import { FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
+import {
+  Controller,
+  Control,
+  FieldValues,
+  Path,
+} from "react-hook-form"
+import {
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
 interface FormFieldProps<T extends FieldValues> {
@@ -26,10 +37,31 @@ const FormField = <T extends FieldValues>({
       control={control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="label">{label}</FormLabel>
+          {/* ✅ Fixed label style */}
+          <FormLabel className="block text-sm font-medium text-gray-700">
+            {label}
+          </FormLabel>
+
           <FormControl>
-            <Input className="input" type={type} placeholder={placeholder} {...field} />
+            {type === "file" ? (
+              // ✅ Special handling for file inputs
+              <Input
+                type="file"
+                placeholder={placeholder}
+                onChange={(e) =>
+                  field.onChange(e.target.files ? e.target.files[0] : null)
+                }
+              />
+            ) : (
+              // ✅ Normal text/email/password input
+              <Input
+                type={type}
+                placeholder={placeholder}
+                {...field}
+              />
+            )}
           </FormControl>
+
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
