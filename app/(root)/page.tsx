@@ -1,67 +1,68 @@
-import React from 'react'
+import InterviewCard from '@/components/InterviewCard'
+import { Button } from '@/components/ui/button'
+import { getCurrentUser} from '@/lib/actions/auth.actions'
+import { getInterviewsByUserId, getLatestInterviews } from '@/lib/actions/general.action'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import InterviewCard from '@/components/InterviewCard'
+import React from 'react'
 
-// Import dummyInterviews from your index.ts file
-import { dummyInterviews } from '@/constants/index'  // adjust the path if needed
+const page = async() => {
+  const user= await getCurrentUser();
+  const [userInterviews,latestInterviews]= await Promise.all([
+    await getInterviewsByUserId(user?.id!),
+    await getLatestInterviews({userId: user?.id!})
+  ])
 
-const Page = () => {
+  const hasPastInterviews = Array.isArray(userInterviews) && userInterviews.length > 0;
+  const hasUpcomingInterviews = latestInterviews ? latestInterviews.length > 0 : false;
   return (
     <>
-      {/* Hero Section */}
-      <section className="card-cta flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="flex flex-col gap-6 max-w-lg">
-          <h2 className="text-2xl font-bold">
-            Get Interview Ready with AI-Powered Practice & Feedback
-          </h2>
-          <p className="text-lg text-gray-600">
-            Practice with real interview questions and receive instant feedback.
-          </p>
-          <Button asChild className="btn-primary max-sm:w-full">
-            <Link href="/interview">Start an Interview</Link>
-          </Button>
+      <section className='card-cta'>
+        <div className='flex flex-col gap-6 max-w-lg'>
+            <h2>Get Interview-Ready with AI-Powered Pratice & Feedback </h2>
+            <p className='text-lg'>
+              Practice on real interview questions & get instant feedback on your performance.
+            </p>
+            <Button asChild className='btn-primary max:sm:w-full'>
+                <Link href="/interview">
+                  Start an Interview
+                </Link>
+            </Button>
         </div>
-        <Image
-          src="/robot.png"
-          alt="AI Interview Assistant"
-          width={400}
-          height={400}
-          priority
-          className="max-sm:hidden"
-        />
-      </section>
+        <Image src="/robot.png" alt="robot" width={400} height={400} className='max-sm:hidden'/>
 
-      {/* Your Interview Section */}
-      <section className="flex flex-col gap-6 mt-8">
-        <h2>Your Interview</h2>
-        <div className="interview-section flex flex-wrap gap-4">
-          {dummyInterviews.map((interview) => (
-            <InterviewCard key={interview.id} {...interview} />
-          ))}
+      </section>
+      <section className='flex flex-col gap-6 mt-8'>
+        <h2>Your Interviews</h2>
+        <div className='interviews-section'>
+          {
+            hasPastInterviews?(
+              userInterviews?.map((interview)=>(
+                <InterviewCard {...interview} key={interview.id}/>
+
+              ))):(
+                <p>You haven't taken any interview yet</p>
+              )
+            }
         </div>
-      </section>
 
-      {/* Interview List Section */}
-      <section className="flex flex-col gap-6 mt-8">
-        <h2 className="text-xl font-semibold">Your Interviews</h2>
-        <div className="interviews-section p-4 border rounded-md text-gray-500">
-          <p>You haven't taken any interviews yet.</p>
-        </div>
       </section>
-
-      {/* Take an Interview Section */}
-      <section className="flex flex-col gap-6 mt-8">
+      <section className='flex flex-col gap-6 mt-8'>
         <h2>Take an Interview</h2>
-        <div className="interview-section flex flex-wrap gap-4">
-          {dummyInterviews.map((interview) => (
-            <InterviewCard key={interview.id} {...interview} />
-          ))}
+        <div className='interviews-section'>
+        {
+            hasUpcomingInterviews?(
+              latestInterviews?.map((interview)=>(
+                <InterviewCard {...interview} key={interview.id}/>
+
+              ))):(
+                <p>There are no new Interviews available</p>
+              )
+            }
         </div>
       </section>
     </>
   )
 }
 
-export default Page
+export default page
