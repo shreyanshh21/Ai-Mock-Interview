@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Converse AI: AI Mock Interview Platform 🚀
 
-## Getting Started
+Converse AI is a full-stack web application designed to help job seekers ace their technical and behavioral interviews through personalized, real-time practice with an AI voice agent. Built using modern web technologies and advanced Generative AI, Converse AI delivers a realistic interview simulation followed by detailed, objective feedback.
 
-First, run the development server:
+✨ Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Experience the platform live and start your personalized interview prep today:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 https://converse-ai-pied.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🌟 Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🎙️ Real-Time Voice Interviews: Conduct mock interviews using a highly realistic, two-way voice conversation powered by Vapi AI, simulating an authentic interview environment.
 
-## Learn More
+🧠 Intelligent Question Generation: Uses Gemini AI to create custom question sets tailored to the user's specified role, experience level, and technology stack.
 
-To learn more about Next.js, take a look at the following resources:
+📊 Structured Feedback: Receive objective, multi-category performance analysis, including a total score (0-100), key strengths, areas for improvement, and detailed comments on technical knowledge and communication skills.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔐 Secure Authentication: User authentication and session management handled securely via Firebase.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📈 Progress Tracking: A centralized dashboard to view past interviews and track score improvements over time.
 
-## Deploy on Vercel
+💻 Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project leverages a powerful and modern stack for performance and scalability:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Component
+
+Technology
+
+Purpose
+
+Frontend/Server
+
+Next.js (App Router)
+
+Routing, Server Actions for secure API calls, and SSR.
+
+Voice AI
+
+Vapi
+
+Real-time voice agents, event handling, and custom workflows.
+
+Intelligence
+
+Google Gemini AI
+
+Content generation (questions) and structured analysis (feedback).
+
+Database/Auth
+
+Firebase & Firestore
+
+Secure user authentication and flexible, scalable database storage.
+
+Styling
+
+Tailwind CSS & Shadcn/ui
+
+Rapid, responsive UI development and accessible components.
+
+🛠️ Getting Started
+
+Follow these steps to set up and run the project locally.
+
+Prerequisites
+
+Node.js (LTS)
+
+GitHub Account
+
+A Firebase Project
+
+Gemini API Key
+
+Vapi API Key and Workflow ID
